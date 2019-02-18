@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "3e6d3254a417de748186c7eecb2ecd2c4f7fb7f5",
+  "iOS" : [
+    {
+      "name" : "AlamofireSwiftyJSON",
+      "hash" : "84736ced595e009ab64dc414de5f71e654adf9a69ef0ee73dfbe4994d4ec46df"
+    }
+  ]
+}

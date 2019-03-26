@@ -23,6 +23,8 @@
 		BE6513AB221630160063FB45 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6513AA221630160063FB45 /* Alamofire.framework */; };
 		BE735816221A267B00BBD2C5 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE735815221A267B00BBD2C5 /* BrowseViewController.swift */; };
 		BE82F30B221C3D4100647932 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82F30A221C3D4100647932 /* PodcastViewController.swift */; };
+		BEC35D13222E061A0080E8FA /* podcastWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC35D12222E061A0080E8FA /* podcastWebViewController.swift */; };
+		BEC35D15222E0D840080E8FA /* PodcastInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC35D14222E0D840080E8FA /* PodcastInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		BE6513AA221630160063FB45 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BE735815221A267B00BBD2C5 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		BE82F30A221C3D4100647932 /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
+		BEC35D12222E061A0080E8FA /* podcastWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = podcastWebViewController.swift; sourceTree = "<group>"; };
+		BEC35D14222E0D840080E8FA /* PodcastInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 				BE65138622162A090063FB45 /* Info.plist */,
 				BE735815221A267B00BBD2C5 /* BrowseViewController.swift */,
 				BE82F30A221C3D4100647932 /* PodcastViewController.swift */,
+				BEC35D12222E061A0080E8FA /* podcastWebViewController.swift */,
+				BEC35D14222E0D840080E8FA /* PodcastInfoViewController.swift */,
 			);
 			path = "pod-tracker-ios-client";
 			sourceTree = "<group>";
@@ -324,9 +330,11 @@
 				BE41C6842218ECFD00D01450 /* ItunesSearchResult.swift in Sources */,
 				BE41C67C2218E2F400D01450 /* FollowedPodcastTableViewController.swift in Sources */,
 				BE65137D22162A070063FB45 /* SecondViewController.swift in Sources */,
+				BEC35D13222E061A0080E8FA /* podcastWebViewController.swift in Sources */,
 				BE82F30B221C3D4100647932 /* PodcastViewController.swift in Sources */,
 				BE41C67E2218E2FB00D01450 /* FollowedPodcastTableViewCell.swift in Sources */,
 				BE65137922162A070063FB45 /* AppDelegate.swift in Sources */,
+				BEC35D15222E0D840080E8FA /* PodcastInfoViewController.swift in Sources */,
 				BE65137B22162A070063FB45 /* FirstViewController.swift in Sources */,
 				BE735816221A267B00BBD2C5 /* BrowseViewController.swift in Sources */,
 			);

@@ -15,6 +15,8 @@ import Foundation
 struct ItuneSearchResultItem{
     let artworkUrl60: String;
     let artworkUrl100: String;
+    let artworkUrl600: String;
+
     let feedUrl: String;
     let trackName: String;
 }

@@ -3,3 +3,5 @@ github "Alamofire/Alamofire" ~> 4.7.2
 github "SwiftyJSON/SwiftyJSON" ~> 4.0
 
 github "SwiftyJSON/Alamofire-SwiftyJSON" "master"
+
+github "tadija/AERecord"

@@ -10,17 +10,22 @@ import UIKit
 import WebKit
 
 
-class PodcastInfoViewController: UIViewController, WKUIDelegate {
+class PodcastInfoViewController: UIViewController, WKUIDelegate , WKNavigationDelegate{
 
     var webView: WKWebView!
     
+    
     var podcast: ItuneSearchResultItem?
+    
+    var playViewController: PlayerViewController?
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
+        webView.navigationDelegate = self
         view = webView
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,5 +40,18 @@ class PodcastInfoViewController: UIViewController, WKUIDelegate {
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
-
+    
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
+    {
+        let strUrl:String = webView.url?.absoluteString ?? ""
+        
+        
+        if !strUrl.contains("https://pod-tracker-client.herokuapp.com/podcast/"){
+            
+            webView.stopLoading()
+            
+            playViewController?.setAudioUrl(url: strUrl)
+        }
+    }
 }

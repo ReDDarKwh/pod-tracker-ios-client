@@ -1,3 +1,4 @@
-github "Alamofire/Alamofire" "4.8.1"
-github "SwiftyJSON/Alamofire-SwiftyJSON" "3e6d3254a417de748186c7eecb2ecd2c4f7fb7f5"
-github "SwiftyJSON/SwiftyJSON" "4.2.0"
+github "Alamofire/Alamofire" "4.8.2"
+github "SwiftyJSON/Alamofire-SwiftyJSON" "64b4c1e710555061e50aad02e8795542fd0a5df5"
+github "SwiftyJSON/SwiftyJSON" "4.3.0"
+github "tadija/AERecord" "4.1.2"

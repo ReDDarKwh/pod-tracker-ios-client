@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import CoreData
+
 
 class PlayerViewController: UIViewController {
 
@@ -19,11 +21,54 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var playBtn: UIButton!
     
     
+    
+    var podcastEpisode	: [NSManagedObject] = []
+    
+    var currentEpisode: NSManagedObject?
+
+    
     var podcast: ItuneSearchResultItem?
     
     var player: AVPlayer?
     
     var embeddedViewController: PodcastInfoViewController?
+    
+    var helloWorldTimer: Timer?
+    
+
+    @objc func sayHello()
+    {
+        if currentEpisode != nil {
+            if player != nil{
+                if ((player?.rate != 0) && (player?.error == nil)) {
+                    
+                    if(player?.currentItem != nil){
+                         currentEpisode?.setValue( Int(player?.currentTime().seconds ?? 0), forKey: "timestep")
+                        
+                        let appDelegate =
+                            UIApplication.shared.delegate as? AppDelegate
+                        
+                        
+                        // 1
+                        let managedContext =
+                            appDelegate!.persistentContainer.viewContext
+                        
+                        do {
+                            try managedContext.save()
+                            
+                        } catch let error as NSError {
+                            print("Could not save. \(error), \(error.userInfo)")
+                        }
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +77,33 @@ class PlayerViewController: UIViewController {
         player = AVPlayer()
         setStatus(str: "Stopped")
         
+        helloWorldTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(sayHello), userInfo: nil, repeats: true)
         
+        
+        
+        
+        //1
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "PodcastEpisode")
+        
+        //3
+        do {
+            podcastEpisode = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        
+       
     }
     
     
@@ -59,9 +130,17 @@ class PlayerViewController: UIViewController {
         player?.pause()
         playBtn.setImage(UIImage(named: "play"), for: .normal)
         
+        if let ep = podcastEpisode.first(where: { $0.value(forKey: "url") as! String == url }) {
+            currentEpisode = ep
+        }else{
+            currentEpisode = save(url: url, timestep: 0)
+        }
+        
         let url  = URL.init(string: url)
         let playerItem: AVPlayerItem = AVPlayerItem(url: url!)
         player?.replaceCurrentItem(with: playerItem)
+        
+        player?.seek(to:CMTimeMakeWithSeconds(Float64(currentEpisode?.value(forKey: "timestep") as! Int), preferredTimescale: 1000) )
         
         player?.play()
         setStatus(str: "Playing")
@@ -91,6 +170,43 @@ class PlayerViewController: UIViewController {
         playBtn.setImage(UIImage(named: "play"), for: .normal)
         setStatus(str: "Stopped")
     }
+    
+    
+    func save(url: String, timestep: Int) -> NSManagedObject {
+        
+        let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate
+               
+        
+        // 1
+        let managedContext =
+            appDelegate!.persistentContainer.viewContext
+        
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: "PodcastEpisode",
+                                       in: managedContext)!
+        
+        let person = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        // 3
+        person.setValue(url, forKeyPath: "url")
+        person.setValue(timestep, forKeyPath: "timestep")
+        
+        // 4
+        do {
+            try managedContext.save()
+            podcastEpisode.append(person)
+            
+          
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+          return person
+    }
+
 
 
 }
